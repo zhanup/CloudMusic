@@ -1,0 +1,42 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "热歌榜",
+          "pathName": "pages/hotlist/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "搜索",
+          "pathName": "pages/search/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "播放列表",
+          "pathName": "pages/playlist/index",
+          "query": "id=6792060654",
+          "scene": null
+        },
+        {
+          "name": "播放歌曲",
+          "pathName": "pages/player/index",
+          "query": "id=441491828",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

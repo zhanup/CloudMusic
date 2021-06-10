@@ -1,0 +1,195 @@
+.u-plhead {
+  position: relative;
+  padding: 60rpx 20rpx 60rpx 30rpx;
+  overflow: hidden;
+
+  .plhead_bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    -webkit-filter: blur(40rpx);
+    filter: blur(40rpx);
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+
+    &:after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      content: " ";
+      background-color: rgba(0, 0, 0, .25);
+    }
+  }
+
+  .plhead_wrap {
+    display: flex;
+    position: relative;
+    z-index: 2;
+  }
+
+  .plhead_fl {
+    position: relative;
+    width: 252rpx;
+    height: 252rpx;
+    background-color: #e2e2e3;
+
+    .u-img {
+      width: 252rpx;
+      height: 256rpx;
+    }
+
+    .lsthd_icon {
+      position: absolute;
+      z-index: 3;
+      top: 20rpx;
+      left: 0;
+      padding: 0 16rpx;
+      height: 34rpx;
+      color: #fff;
+      font-size: 18rpx;
+      text-align: center;
+      line-height: 34rpx;
+      background-color: rgba(217, 48, 48, .8);
+      border-top-right-radius: 34rpx;
+      border-bottom-right-radius: 34rpx;
+    }
+
+    .lsthd_num {
+      position: absolute;
+      right: 6rpx;
+      top: 0;
+      z-index: 3;
+      padding-left: 30rpx;
+      color: #fff;
+      font-size: 24rpx;
+      background-position: 0;
+      background-repeat: no-repeat;
+      background-size: 22rpx 20rpx;
+      text-shadow: 2rpx 0 0 rgb(0 0 0 / 15%);
+    }
+  }
+
+  .plhead_fr {
+    flex: 1 1 auto;
+    width: 1%;
+    margin-left: 32rpx;
+    padding-top: 6rpx;
+
+
+    .lsthd_title {
+      padding-top: 2rpx;
+      font-size: 34rpx;
+      line-height: 1.3;
+      color: #fefefe;
+      height: 88rpx;
+      display: -webkit-box;
+      -webkit-box-pack: center;
+    }
+
+    .lsthd_auth {
+      display: block;
+      position: relative;
+      color: hsla(0, 0%, 100%, .7);
+    }
+
+    .lsthd_ava {
+      position: relative;
+      display: inline-block;
+      width: 60rpx;
+      height: 60rpx;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 10rpx;
+
+    }
+
+    .u-img {
+      border-radius: 50%;
+    }
+
+    .ava-icon {
+      display: inline-block;
+      position: absolute;
+      right: -10rpx;
+      bottom: 0;
+      width: 24rpx;
+      height: 24rpx;
+      background-image: url(https://s3.music.126.net/mobile-new/img/usericn_2x.png?6423c0681bfb3358d5c684c9b998e412=);
+      background-position: -80rpx 0;
+      background-repeat: no-repeat;
+      background-size: 150rpx auto;
+    }
+  }
+}
+
+.pylst_list {
+  .u-smtitle {
+    height: 46rpx;
+    line-height: 46rpx;
+    padding: 0 20rpx;
+    font-size: 24rpx;
+    color: #666;
+    background-color: #eeeff0;
+  }
+
+  .m-sglst {
+    position: relative;
+  }
+
+  .m-sgitem {
+    display: flex;
+    padding-left: 20rpx;
+  }
+
+  .sgfl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80rpx;
+    font-size: 34rpx;
+    color: #999;
+    margin-left: -20rpx;
+  }
+
+  .sgfr {
+    flex: 1 1 auto;
+    display: flex;
+    position: relative;
+  }
+
+  .sgchfl {
+    padding: 12rpx 0;
+    width: 0;
+    flex: 1 1 auto;
+  }
+
+  .sgtl {
+    font-size: 34rpx;
+  }
+
+  .sgalia {
+    color: #888;
+    margin-left: 8rpx;
+  }
+
+  .sginfo {
+    font-size: 24rpx;
+    color: #888;
+  }
+
+  .sgchfr {
+    display: flex;
+    align-items: center;
+    padding: 0 20rpx;
+  }
+}

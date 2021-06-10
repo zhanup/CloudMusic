@@ -1,0 +1,102 @@
+<view class="m-hmsrch">
+  <!-- 搜索框 -->
+  <view class="m-input">
+    <input class="inputcover" type="text" placeholder="搜索歌曲、歌手、专辑" placeholder-style="color: #c9c9c9;" value="{{inpValue}}" bindinput="handleInput" bindfocus="handleInput" bindconfirm="handleEnter">
+      <i class="u-svg u-svg-srch"></i>
+    </input>
+    <view class="close" wx:if="{{inpValue}}" bindtap="handleClear">
+      <i class="u-svg u-svg-empty"></i>
+    </view>
+  </view>
+  <!-- 搜索提示 -->
+  <view class="m-recom" wx:if="{{mode===2}}">
+    <view class="title f-bd f-bd-btm f-thide">搜索"{{inpValue}}"</view>
+    <view>
+      <view class="recomitem" wx:for="{{suggestList}}" wx:key="index" bindtap="handleSuggestSearch" data-suggest="{{item.keyword}}">
+        <i class="u-svg u-svg-search"></i>
+        <view class="text f-bd f-bd-btm f-thide">{{item.keyword}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+  
+<view class="m-default" wx:if="{{mode===1}}">
+  <!-- 热门搜索 -->
+  <view class="m-hotlist">
+    <view class="title">热门搜索</view>
+    <view class="list">
+      <view class="item" wx:for="{{hots}}" wx:key="item" bindtap="handleHotSearch" data-word="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+  <!-- 搜索历史 -->
+  <view class="m-history">
+    <view class="list">
+      <view class="item" wx:for="{{history}}" wx:key="item" bindtap="handleRemoveHistory" data-index="{{index}}">
+        <i class="u-svg u-svg-histy"></i>
+        <view class="histyr">
+          <text class="link f-thide">{{item}}</text>
+          <view class="close">
+            <i class="u-svg u-svg-close"></i>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="m-searchresult" wx:if="{{mode===3}}">
+  <view class="m-matchlist">
+    <view class="title">最佳匹配</view>
+    <view>
+      <!-- 歌手 -->
+      <view class="matchitem artist" wx:if="{{matchlist.artist}}">
+        <view class="linkcover f-bd f-bd-btm">
+          <view class="piccover">
+            <image class="pic" src="{{matchlist.artist[0].img1v1Url}}" mode="widthFix" lazy-load="true" />  
+          </view>
+          <view class="describe">
+            <view class="maindes f-thide">歌手：{{matchlist.artist[0].name}}</view>
+          </view>
+          <i class="u-svg u-svg-arr"></i>
+        </view>
+      </view>
+      <!-- 专辑 -->
+      <view class="matchitem album" wx:if="{{matchlist.album}}">
+        <view class="linkcover f-bd f-bd-btm">
+          <view class="piccover">
+            <image class="pic" src="{{matchlist.album[0].picUrl}}" mode="widthFix" lazy-load="true" />  
+          </view>
+          <view class="describe">
+            <view class="maindes f-thide">专辑：{{matchlist.album[0].name}}</view>
+            <view class="hcover addtional f-thide">{{matchlist.album[0].artist.name}}</view>
+          </view>
+          <i class="u-svg u-svg-arr"></i>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- 歌曲列表 -->
+  <view class="m-songlist">
+    <view class="m-sglst">
+      <navigator class="m-sgitem" wx:for="{{songlist}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
+        <view class="sgfr f-bd f-bd-btm">
+          <view class="sgchfl">
+            <view class="f-thide sgtl">{{item.name}}</view>
+            <view wx:if="{{item.ar[1]}}" class="f-thide sginfo">{{item.ar[0].name}} / {{item.ar[1].name}} - {{item.al.name}}</view>
+            <view wx:else class="f-thide sginfo">{{item.ar[0].name}} - {{item.al.name}}</view>
+          </view>
+          <view class="sgchfr">
+            <view class="u-hmsprt sgchply"></view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+  
+  
+  

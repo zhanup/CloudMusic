@@ -1,0 +1,47 @@
+<view class="u-plhead">
+  <!-- 歌单背景和信息 -->
+  <view class="plhead_bg" style="background-image:url({{playlist.coverImgUrl}})"></view>
+  <view class="plhead_wrap">
+    <view class="plhead_fl lsthd_fl">
+      <image class="u-img" src="{{playlist.coverImgUrl}}" mode="widthFix"  />
+      <view class="lsthd_icon">歌单</view>
+      <i class="u-earp lsthd_num">18.4万</i>
+    </view>
+    <view class="plhead_fr">
+      <view class="f-thide2 f-brk lsthd_title">{{playlist.name}}</view>
+      <view class="lsthd_auth f-thide">
+        <view class="u-avatar lsthd_ava">
+          <image class="u-img" src="{{playlist.creator.avatarUrl}}" mode="widthFix" />
+          <view class="ava-icon ava-icon-daren"></view>
+        </view>
+        {{playlist.creator.nickname}}
+      </view>
+    </view>
+  </view>  
+</view>
+
+<!-- 歌单列表 -->
+<view class="pylst_list">
+  <view class="u-smtitle">歌曲列表</view>
+  <view class="m-sglst">
+    <navigator class="m-sgitem" wx:for="{{playlist.tracks}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
+      <view class="sgfl">{{index + 1}}</view>
+      <view class="sgfr f-bd f-bd-btm">
+        <view class="sgchfl">
+          <view class="f-thide sgtl">
+            {{item.name}}
+            <text wx:if="{{item.alia[0]}}" class="sgalia">({{item.alia[0]}})</text>
+          </view>
+          <view wx:if="{{item.ar[1]}}" class="f-thide sginfo">{{item.ar[0].name}} / {{item.ar[1].name}} - {{item.name}}</view>
+          <view wx:else class="f-thide sginfo">{{item.ar[0].name}} - {{item.name}}</view>
+        </view>
+        <view class="sgchfr">
+          <view class="sgchply"></view>
+        </view>
+      </view>
+    </navigator>
+      
+  </view>
+</view>
+  
+  

@@ -1,0 +1,49 @@
+<view class="m-song">
+  <view class="m-song-bg" style="background-image: url({{picUrl}});"></view>
+    
+  <view>
+    <view class="m-song-wrap">
+      <view class="m-song-disc">
+        <view class="m-song-turn">
+          <view class="m-song-rollwrap" style="animation-play-state: {{play ? 'running' : 'paused'}}">
+            <view class="m-song-img">
+              <image class="u-img" src="{{picUrl}}" mode="widthFix"></image>
+            </view> 
+          </view> 
+          <view class="m-song-lgour" style="animation-play-state: {{play ? 'running' : 'paused'}}">
+            <view class="m-song-light"></view>
+          </view> 
+        </view>
+        <view class="m-song-plybtn m-player" wx:if="{{!play}}"></view>
+      </view>
+      <view class="m-song-clickarea" bindtap="playMusic"></view>  
+    </view>   
+  </view>
+
+  <view style="position: relative; margin-bottom: 140rpx;">
+    <!-- 信息 -->
+    <view class="m-song-info">
+      <view class="m-song-h2">
+        <text class="m-song-sname">{{title}}</text>
+        <text class="m-song-gap">-</text>
+        <text class="m-song-autr">{{singer}}</text>    
+      </view>
+      <!-- 歌词 -->
+      <view class="m-song-lrc">
+        <view class="m-song-scroll">
+          <view class="m-song-iner" style="top: -{{32 * (idx - 2)}}px;">
+            <view class="m-song-lritem f-thide {{ (idx - 1) == index ? '.active' : '' }}" wx:for="{{lrcCont}}" wx:key="index">{{item}}</view>
+          </view>   
+        </view>
+      </view>
+    </view>
+  </view>
+    
+  <!-- 进度条 -->
+  <view class="m-song-slider">
+    <view class="current-time">{{nowTime}}</view>
+    <slider class="slider" color="#e9e9e9" block-size="14" backgroundColor="#666" selected-color="#fff" value="{{nowValue}}" max="{{duration}}" bindchanging="handleChanging" bindchange="handleChange" />
+    <view class="duration">{{totalTime}}</view>
+  </view>
+</view>
+  

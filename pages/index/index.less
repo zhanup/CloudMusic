@@ -1,0 +1,133 @@
+.recommend {
+  padding-top: 40rpx;
+}
+
+.remd_tl {
+  font-size: 34rpx;
+  position: relative;
+  padding-left: 18rpx;
+  margin-bottom: 28rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 4rpx;
+    height: 100%;
+    background-color: #d33a31;
+  }
+}
+
+.remd_songs {
+  padding-bottom: 48rpx;
+
+  .remd_ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .remd_li {
+    width: 33%;
+    margin-bottom: 32rpx;
+  }
+
+  .remd_img {
+    position: relative;
+    padding-bottom: 100%;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 20px;
+      z-index: 2;
+      background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0));
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0));
+    }
+  }
+
+  .u-img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  .remd_lnum {
+    position: absolute;
+    right: 10rpx;
+    top: 4rpx;
+    z-index: 3;
+    color: #fff;
+    font-size: 24rpx;
+    padding-left: 26rpx;
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: 22rpx 20rpx;
+  }
+
+  .remd_text {
+    padding: 12rpx 4rpx 0 12rpx;
+    font-size: 26rpx;
+    min-height: 30rpx;
+    line-height: 1.2;
+  }
+
+}
+
+.remd_newsg {
+  .m-sgitem {
+    padding-left: 20rpx;
+    display: flex;
+  }
+
+  .sgfr {
+    flex: 1 1 auto;
+    display: flex;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+  }
+
+  .sgchfl {
+    width: 0;
+    flex: 1 1 auto;
+    padding: 12rpx 0;
+  }
+
+  .sginfo {
+    color: #888;
+    font-size: 24rpx;
+  }
+
+  .sgalia {
+    color: #888;
+    margin-left: 4rpx;
+
+  }
+
+  .sgchfr {
+    padding: 0 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+  }
+
+}

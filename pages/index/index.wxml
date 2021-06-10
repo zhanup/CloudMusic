@@ -1,0 +1,34 @@
+<view class="recommend">
+  <!-- 编辑推荐 -->
+  <view class="remd_tl">编辑推荐</view>
+  <view class="remd_songs">
+    <view class="remd_ul">
+      <navigator class="remd_li" wx:for="{{remdSongs}}" wx:key="id" url="/pages/playlist/index?id={{item.id}}">
+        <view class="remd_img">
+          <image class="u-img" mode="widthFix" src="{{item.picUrl}}" />
+          <view class="u-earp remd_lnum">{{item.playCount}}</view> 
+        </view>
+        <text class="remd_text f-thide2">{{item.name}}</text>
+      </navigator>
+    </view>
+  </view>
+  <!-- 最新音乐 -->
+  <view class="remd_tl">最新音乐</view>
+  <view class="remd_newsg">
+    <navigator class="m-sgitem" wx:for="{{remdNewsg}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
+      <view class="sgfr">
+        <view class="sgchfl">
+          <view class="f-thide sgtl">
+            {{item.name}}
+            <text class="sgalia" wx:if="{{item.alias[0]}}">({{item.alias[0]}})</text>
+          </view>
+          <view class="f-thide sginfo">{{item.artists[0].name}} - {{item.name}}</view>
+        </view>
+        <view class="sgchfr">
+          <view class="sgchply"></view>
+        </view>
+      </view>   
+    </navigator>
+  </view>
+    
+</view>

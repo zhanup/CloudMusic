@@ -1,0 +1,38 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/hotlist/index",
+    "pages/search/index",
+    "pages/playlist/index",
+    "pages/player/index"
+  ],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "云音乐",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "position": "top",
+    "selectedColor": "#dd001b",
+    "list": [
+    {
+      "pagePath": "pages/index/index",
+      "text": "推荐音乐"
+    },
+    {
+      "pagePath": "pages/hotlist/index",
+      "text": "热歌榜"
+    },
+    {
+      "pagePath": "pages/search/index",
+      "text": "搜索"
+    }
+  ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
