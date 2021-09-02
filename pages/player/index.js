@@ -86,10 +86,17 @@ Page({
   // 格式化歌词
   parseLyric(lyric) {
     const patt  = /\d{2}:\d{2}\.\d{2,3}/g;
-    let lrcTime = lyric.match(patt);  // 提取时间
-    let lrcCont = lyric.trim().split('\n');  // 提取歌词
-  
-    lrcCont.forEach((v,i,a) =>  a[i] = v.slice(11));  // 去除空格
+    // 提取时间
+    let lrcTime = lyric.match(patt);
+    // 提取歌词
+    let lrcCont = lyric.trim().split('\n');  
+
+    // 去除空格
+    lrcCont.forEach((v,i,a) =>  {
+      const index = v.indexOf(']')
+      a[i] = v.slice(index + 1);
+    });
+    // 去除空行
     lrcCont.forEach((v,i) => {
       if (v === '') {
         lrcTime.splice(i, 1);
@@ -101,7 +108,7 @@ Page({
       const t = v.split(':')
       a[i] = parseInt(t[0], 10) * 60 * 1000 + parseFloat(t[1]) * 1000;
     });
-
+    console.log(lrcTime.length, lrcCont.length);
     return {lrcTime, lrcCont};
   },
 
