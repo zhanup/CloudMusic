@@ -11,7 +11,7 @@ Page({
     singer: '',
     picUrl: '',
     duration: 0,
-    play: true,
+    play: false,
     nowValue: 0,
     nowTime: '00:00',
     totalTime: '00:00',
@@ -19,7 +19,8 @@ Page({
     lrcCont: [],
     idx: 0
   },
-  autoStop: false,
+
+  autoStop: true,
 
   onLoad(options) {
     const { id } = options;
@@ -28,8 +29,9 @@ Page({
     this.getLyric(id);
     
 
+    // 监听音乐开始播放
     manager.onCanplay(() => {
-      console.log('onCanplay')
+      this.setData({play: true});
       this.autoScroll();
     });
 
@@ -108,7 +110,7 @@ Page({
       const t = v.split(':')
       a[i] = parseInt(t[0], 10) * 60 * 1000 + parseFloat(t[1]) * 1000;
     });
-    console.log(lrcTime.length, lrcCont.length);
+
     return {lrcTime, lrcCont};
   },
 
@@ -127,7 +129,7 @@ Page({
     const { lrcTime } = this.data;
 
     manager.onTimeUpdate(() => {
-      if (this.autoStop === false) {
+      if (this.autoStop) {
         const curTime = Math.round(manager.currentTime * 1000);
 
         for (let i = 0; i < lrcTime.length; i++) {
@@ -159,17 +161,21 @@ Page({
   },
 
   // 拖到进度条，自动滚动停止
-  handleChanging() {
-    if (this.autoStop === false) {
-      this.autoStop = true;
-    }
+  handleChanging(e) {
+    const { value } = e.detail;
+    this.autoStop = false;
+    this.setData({ 
+      nowTime: formatTime(value),
+      nowValue: value
+    });
   },
 
+  // 拖动时的处理函数
   handleChange(e) {
-    this.autoStop = true;
+    this.autoStop = false;
     // 获取拖动后的时间
     const { value } = e.detail;
-    let time = +(value / 1000).toFixed(3);
+    const time = +(value / 1000).toFixed(3);
 
     this.setData({ 
       nowTime: formatTime(value),
@@ -179,6 +185,6 @@ Page({
     // 播放时间跳转
     manager.seek(time);
 
-    this.autoStop = false;
+    this.autoStop = true;
   }
 })
