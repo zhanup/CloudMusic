@@ -8,6 +8,7 @@ page, view, text, image, navigator {
 
 page {
   font-size: 28rpx;
+  line-height: 1.5;
   font-family: Helvetica, sans-serif, STHeiTi;
   color: #333;
 }
@@ -63,11 +64,11 @@ image {
 .sgchply {
   background-image: url(https://s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=);
   background-repeat: no-repeat;
-  background-size: 332rpx 194rpx;
+  background-size: 166px 97px;
   display: inline-block;
-  width: 44rpx;
-  height: 44rpx;
-  background-position: -48rpx 0;
+  width: 22px;
+  height: 22px;
+  background-position: -24px 0;
 }
 
 .u-img {

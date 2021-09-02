@@ -1,6 +1,6 @@
-import { formatPlayCount } from '../../utils/util';
-import { request } from '../../request/index';
-import regeneratorRuntime from '../../lib/runtime/runtime';
+import { formatPlayCount } from '../../utils/format';
+import { request } from '../../utils/request';
+import regeneratorRuntime from '../../utils/runtime';
 
 Page({
   data: {
@@ -25,10 +25,8 @@ Page({
   // 最新音乐
   async getRemdNewsg() {
     const res = await request({url: '/personalized/newsong'});
-    let remdNewsg = [];
-    remdNewsg = res.result.map(item => item.song)
     this.setData({
-      remdNewsg
+      remdNewsg: res.result.map(item => item.song)
     })
   }
 })

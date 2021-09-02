@@ -81,20 +81,7 @@
 
   <!-- 歌曲列表 -->
   <view class="m-songlist">
-    <view class="m-sglst">
-      <navigator class="m-sgitem" wx:for="{{songlist}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
-        <view class="sgfr f-bd f-bd-btm">
-          <view class="sgchfl">
-            <view class="f-thide sgtl">{{item.name}}</view>
-            <view wx:if="{{item.ar[1]}}" class="f-thide sginfo">{{item.ar[0].name}} / {{item.ar[1].name}} - {{item.al.name}}</view>
-            <view wx:else class="f-thide sginfo">{{item.ar[0].name}} - {{item.al.name}}</view>
-          </view>
-          <view class="sgchfr">
-            <view class="u-hmsprt sgchply"></view>
-          </view>
-        </view>
-      </navigator>
-    </view>
+    <SongList list="{{songlist}}" />
   </view>
 </view>
   

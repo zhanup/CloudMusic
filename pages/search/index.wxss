@@ -212,39 +212,3 @@
   background-image: url(https://s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=);
   background-position: 0 -60rpx;
 }
-.m-songlist .m-sglst {
-  position: relative;
-}
-.m-songlist .m-sgitem {
-  display: flex;
-  padding-left: 20rpx;
-}
-.m-songlist .sgfr {
-  flex: 1 1 auto;
-  display: flex;
-  position: relative;
-}
-.m-songlist .sgchfl {
-  flex: 1 1 auto;
-  padding: 12rpx 0;
-  width: 0;
-}
-.m-songlist .sgtl {
-  font-size: 34rpx;
-}
-.m-songlist .sginfo {
-  font-size: 12px;
-  color: #888;
-}
-.m-songlist .sgchfr {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20rpx;
-}
-.m-songlist .sgchply {
-  display: inline-block;
-  width: 44rpx;
-  height: 44rpx;
-  background-position: -48rpx 0;
-}

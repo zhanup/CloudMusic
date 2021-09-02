@@ -23,24 +23,8 @@
 <!-- 歌单列表 -->
 <view class="pylst_list">
   <view class="u-smtitle">歌曲列表</view>
-  <view class="m-sglst">
-    <navigator class="m-sgitem" wx:for="{{playlist.tracks}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
-      <view class="sgfl">{{index + 1}}</view>
-      <view class="sgfr f-bd f-bd-btm">
-        <view class="sgchfl">
-          <view class="f-thide sgtl">
-            {{item.name}}
-            <text wx:if="{{item.alia[0]}}" class="sgalia">({{item.alia[0]}})</text>
-          </view>
-          <view wx:if="{{item.ar[1]}}" class="f-thide sginfo">{{item.ar[0].name}} / {{item.ar[1].name}} - {{item.name}}</view>
-          <view wx:else class="f-thide sginfo">{{item.ar[0].name}} - {{item.name}}</view>
-        </view>
-        <view class="sgchfr">
-          <view class="sgchply"></view>
-        </view>
-      </view>
-    </navigator>
-      
+  <view>
+    <SongList show="{{true}}" list="{{playlist.tracks}}" />
   </view>
 </view>
   

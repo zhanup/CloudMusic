@@ -27,13 +27,13 @@
         {
           "name": "播放列表",
           "pathName": "pages/playlist/index",
-          "query": "id=6792060654",
+          "query": "id=6947817379",
           "scene": null
         },
         {
           "name": "播放歌曲",
           "pathName": "pages/player/index",
-          "query": "id=441491828",
+          "query": "id=1859245776",
           "scene": null
         }
       ]

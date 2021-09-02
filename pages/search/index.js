@@ -1,5 +1,5 @@
-import { request } from '../../request/index';
-// import regeneratorRuntime from '../../lib/runtime/runtime';
+import { request } from '../../utils/request';
+import regeneratorRuntime from '../../utils/runtime';
 
 Page({
 
@@ -10,7 +10,11 @@ Page({
     inpValue: '',
     suggestList: [],
     matchlist: [],
-    songlist:[]
+    songlist:[],
+    offset: 0,
+    keywords: '',
+    total: 0,
+    flag: true
   },
 
   timer: -1,
@@ -18,25 +22,48 @@ Page({
   onLoad() {
     this.getHotWord();
   },
-
-  // 热门搜索关键字
-  getHotWord() {
-    request({ url: '/search/hot' }).then((res) => {
-      this.setData({ hots: res.result.hots.map(item => item.first) });
-    });
+  // 触底加载更多
+  onReachBottom() {
+    const { offset, songlist, keywords, total } = this.data;
+    if (songlist.length === total) {
+      const { flag } = this.data;
+      if (flag) {
+        wx.showToast({
+          title: '歌曲已全部加载',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+      this.setData({ flag: false });
+      return;
+    }
+    this.setData({offset: offset + 1});
+    this.getSong(keywords);
   },
 
-  // 搜索结果
-  getSearchData(value) {
-    const p1 = request({ url: '/search/multimatch', data: { keywords: value } });
-    const p2 = request({ url: '/search', data: { keywords: value } });
-
-    Promise.all([p1, p2]).then(res => {
-      // console.log(res)
-      this.setData({
-        matchlist: res[0].result,
-        songlist: res[1].result.songs
-      });
+  // 热门搜索关键字
+  async getHotWord() {
+    const res = await request({ url: '/search/hot' });
+    this.setData({ hots: res.result.hots.map(item => item.first) });
+  },
+  // 搜索建议
+  async getSuggest(value) {
+    const res = await request({ url: '/search/suggest', data: { keywords: value } })
+    this.setData({ suggestList: res.result.allMatch });
+  },
+  // 专辑列表
+  async getMatch(value) {
+    const res = await request({ url: '/search/multimatch', data: { keywords: value } });
+    this.setData({matchlist: res.result});
+  },
+  // 歌曲列表
+  async getSong(value) {
+    const { offset, songlist } = this.data;
+    const res = await request({ url: '/search', data: { offset: offset*10, keywords: value, limit: 10} });
+    this.setData({
+      songlist: [...songlist, ...res.result.songs],
+      keywords: value,
+      total: res.result.songCount
     });
   },
 
@@ -55,7 +82,8 @@ Page({
       history
     });
 
-    this.getSearchData(value);
+    this.getMatch(value);
+    this.getSong(value);
   },
 
   handleInput(e) {   
@@ -75,13 +103,10 @@ Page({
 
       // 防抖
       clearTimeout(this.timer);
+
       this.timer = setTimeout(() => {
-         // 发送请求
-        request({ url: '/search/suggest', data: { keywords: value } }).then(res => {
-          // 保存数据
-          this.setData({ suggestList: res.result.allMatch });
-        });
-      }, 500)
+         this.getSuggest(value);
+      }, 500);
   },
 
   // 清除数据
@@ -91,7 +116,11 @@ Page({
       inpValue: '',
       suggestList: [],
       matchlist: [],
-      songlist: []
+      songlist: [],
+      offset: 0,
+      keywords: '',
+      total: 0,
+      flag: true
     })
   },
 
@@ -111,7 +140,8 @@ Page({
       inpValue: word
     });
 
-    this.getSearchData(word);
+    this.getMatch(word);
+    this.getSong(word);
   },
 
   // 建议搜索
@@ -129,7 +159,9 @@ Page({
       mode: 3,
       history
     });
-    this.getSearchData(suggest);
+
+    this.getMatch(value);
+    this.getSong(value);
   },
 
   // 移除搜索历史

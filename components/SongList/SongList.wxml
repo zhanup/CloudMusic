@@ -1,0 +1,39 @@
+<view class="m-sglst">
+  <navigator class="m-sgitem" wx:for="{{list}}" wx:key="id" url="/pages/player/index?id={{item.id}}">
+   <view wx:if="{{show}}"  class="sgfl sgcolor">{{index + 1}}</view>
+
+    <view class="sgfr">
+      <view class="sgchfl">
+        <!-- 歌曲名 -->
+        <view class="f-thide sgtl">
+          {{item.name}}<text class="sgalia" wx:if="{{item.alia[0] || item.alias[0]}}">({{item.alia[0] || item.alias[0]}})</text>
+        </view>
+
+        <!-- 歌曲信息 -->
+        <view class="f-thide sginfo">
+          <block  wx:if="{{item.ar[1] || (item.artists[1] && !tools.isString(item.artists))}}">
+            {{item.ar[0].name || item.artists[0].name}} / {{item.ar[1].name || item.artists[1].name}}- {{item.name}}
+          </block>
+
+          <block wx:else>
+            {{item.ar[0].name || item.artists[0].name || item.artists}} - {{item.name}}
+          </block>
+        </view>
+
+      </view>
+      <view class="sgchfr">
+        <view class="sgchply"></view>
+      </view>
+    </view>
+  </navigator>
+</view>
+
+<wxs module="tools">
+  function isString(arg) {
+    return typeof arg === "string";
+  }
+
+  module.exports = {
+    isString: isString
+  }
+</wxs>
