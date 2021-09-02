@@ -1,5 +1,7 @@
 import { request } from '../../utils/request';
 import { formatTime } from '../../utils/format';
+import regeneratorRuntime from '../../utils/runtime';
+
 const manager = wx.getBackgroundAudioManager();
 
 Page({
@@ -19,35 +21,17 @@ Page({
   },
   autoStop: false,
 
-  async onLoad(options) {
+  onLoad(options) {
     const { id } = options;
+
+    this.getMusicInfo(id);
+    this.getLyric(id);
     
-    const p1 = request({ url: '/music/url', data: { id } });  // 获取播放地址
-    const p2 = request({ url: '/lyric', data: { id } });  // 获取歌词
-    const p3 = request({ url: '/music/detail', data: { id } });  // 获取歌曲信息
 
-    const result = await Promise.all([p1, p2, p3]);
-    console.log(result);
-
-    const url = result[0].data[0].url;
-    const lyric = result[1].lrc.lyric;
-    const detail = result[2].songs[0];
-    const title = this.setTitle(detail);
-    const { lrcTime, lrcCont } = this.parseLyric(lyric);
-
-    this.setData({
-      title,
-      url,
-      lrcTime,
-      lrcCont,
-      duration: detail.dt,
-      picUrl: detail.al.picUrl,
-      singer: detail.ar.map(item => item.name).join('/'),
-      totalTime: formatTime(detail.dt)
+    manager.onCanplay(() => {
+      console.log('onCanplay')
+      this.autoScroll();
     });
-
-    this.setPlayInfo();
-    this.autoScroll();
 
     // 自然结束播放
     manager.onEnded(() => {
@@ -57,7 +41,35 @@ Page({
         nowValue: 0
       });
     });
-    
+  
+  },
+
+  // 歌词
+  async getLyric(id) {
+    const res = await request({url: '/lyric', data: { id }});
+    const lyric =  res.lrc.lyric;
+    const { lrcTime, lrcCont } = this.parseLyric(lyric);
+
+    this.setData({ lrcTime, lrcCont });
+  },
+  // 歌曲详情
+  async getMusicInfo(id) {
+    const p1 =  request({url: '/music/url', data: { id }});
+    const p2 =  request({url: '/music/detail', data: { id }});
+    const res = await Promise.all([p1, p2]);
+
+    const info = res[1].songs[0];
+    const title = this.setTitle(info);
+
+    this.setData({
+      url: res[0].data[0].url,
+      title,
+      duration: info.dt,
+      picUrl: info.al.picUrl,
+      singer: info.ar.map(item => item.name).join('/'),
+      totalTime: formatTime(info.dt)
+    });
+    this.setPlayInfo();
   },
 
   // 设置歌曲名
@@ -73,7 +85,7 @@ Page({
 
   // 格式化歌词
   parseLyric(lyric) {
-    const patt  = /\d{2}:\d{2}\.\d{3}/g;
+    const patt  = /\d{2}:\d{2}\.\d{2,3}/g;
     let lrcTime = lyric.match(patt);  // 提取时间
     let lrcCont = lyric.trim().split('\n');  // 提取歌词
   
@@ -128,7 +140,6 @@ Page({
 
   // 控制播放
   playMusic() {
-    console.log(111)
     let { play } = this.data;
     if (play) {
       play = false;
