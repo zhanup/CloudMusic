@@ -54,6 +54,11 @@ Page({
       // console.log('-----onCanplay-----')
     });
 
+    // 跳转完成
+    manager.onSeeked(() => {
+      this.autoStop = true;
+    });
+
     // 自然结束播放
     manager.onEnded(() => {
       this.setPlayInfo();  //重新播放
@@ -61,11 +66,6 @@ Page({
         nowTime: '00:00',
         nowValue: 0
       });
-    });
-
-    // 跳转完成
-    manager.onSeeked(() => {
-      this.autoStop = true;
     });
   },
 
@@ -193,7 +193,6 @@ Page({
   // 拖动时的处理函数
   handleChange(e) {
     this.autoStop = false;
-    this.setData({play: false});
     // 获取拖动后的时间
     const { value } = e.detail;
     const time = +(value / 1000).toFixed(3);
@@ -203,8 +202,9 @@ Page({
 
     this.setData({ 
       nowTime: formatTime(value),
-      nowValue: value,
-      play: true
+      nowValue: value
     });
+
+    // this.autoStop = true;
   }
 })

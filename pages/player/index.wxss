@@ -1,3 +1,7 @@
+.m-song {
+  height: 100vh;
+  overflow: hidden;
+}
 .m-song-bg {
   background-color: #161824;
   background-position: 50%;
@@ -153,7 +157,7 @@
 }
 .m-song-lrc .m-song-scroll {
   font-size: 32rpx;
-  height: 96px;
+  height: 160px;
   overflow: hidden;
   text-align: center;
   color: hsla(0, 0%, 100%, 0.6);

@@ -31,8 +31,8 @@
       <!-- 歌词 -->
       <view class="m-song-lrc">
         <view class="m-song-scroll">
-          <view class="m-song-iner" style="top: -{{32 * (idx - 2)}}px;">
-            <view class="m-song-lritem f-thide {{ (idx - 1) == index ? '.active' : '' }}" 
+          <view class="m-song-iner" style="transform: translateY({{-32 * ((idx - 3) > 0 ? (idx - 3) : 0)}}px);">
+            <view class="m-song-lritem f-thide {{ idx == (index + 1) ? '.active' : '' }}" 
               wx:for="{{lrcCont}}" 
               wx:key="index"
             >{{item}}</view>
