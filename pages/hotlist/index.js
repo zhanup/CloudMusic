@@ -15,15 +15,21 @@ Page({
     });
   },
   onPullDownRefresh() {
-    console.log(666)
+    this.setData({hotSongs: []});
+    // 下拉重新获取歌曲列表
+    this.getHotSongs(() => {
+      setTimeout(() => {
+        wx.stopPullDownRefresh();
+      }, 500);
+    });
   },
-  async getHotSongs() {
+  async getHotSongs(callback) {
     const result = await request({url: '/top/songs'});
     const hotSongs = result.data;
     hotSongs.forEach((item) => {
       item.artists = item.artists.map(item => item.name).join(' / ');
     });
     this.setData({ hotSongs });
-    
+    callback && callback();
   }
 });

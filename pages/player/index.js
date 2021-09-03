@@ -20,19 +20,38 @@ Page({
     idx: 0
   },
 
-  autoStop: true,
+  autoStop: false,
 
   onLoad(options) {
     const { id } = options;
 
     this.getMusicInfo(id);
     this.getLyric(id);
-    
+    this.monitor();
+  
+  },
 
+  // 监听歌曲播放
+  monitor() {
     // 监听音乐开始播放
-    manager.onCanplay(() => {
+    manager.onPlay(() => {
+      this.autoStop = true;
       this.setData({play: true});
-      this.autoScroll();
+      // console.log('-----onPlay-----')
+    });
+
+    // 音频加载中事件
+    manager.onWaiting(() => {
+      wx.showLoading({
+        title: '加载中',
+      });
+      // console.log('-----onWaiting-----')
+    });
+
+    // 音频进入可播放状态事件
+    manager.onCanplay(() => {
+      wx.hideLoading()
+      // console.log('-----onCanplay-----')
     });
 
     // 自然结束播放
@@ -43,7 +62,11 @@ Page({
         nowValue: 0
       });
     });
-  
+
+    // 跳转完成
+    manager.onSeeked(() => {
+      this.autoStop = true;
+    });
   },
 
   // 歌词
@@ -71,7 +94,9 @@ Page({
       singer: info.ar.map(item => item.name).join('/'),
       totalTime: formatTime(info.dt)
     });
+
     this.setPlayInfo();
+    this.autoScroll();
   },
 
   // 设置歌曲名
@@ -129,7 +154,7 @@ Page({
     const { lrcTime } = this.data;
 
     manager.onTimeUpdate(() => {
-      if (this.autoStop) {
+      if (this.autoStop === true) {
         const curTime = Math.round(manager.currentTime * 1000);
 
         for (let i = 0; i < lrcTime.length; i++) {
@@ -161,30 +186,25 @@ Page({
   },
 
   // 拖到进度条，自动滚动停止
-  handleChanging(e) {
-    const { value } = e.detail;
+  handleChanging() {
     this.autoStop = false;
-    this.setData({ 
-      nowTime: formatTime(value),
-      nowValue: value
-    });
   },
 
   // 拖动时的处理函数
   handleChange(e) {
     this.autoStop = false;
+    this.setData({play: false});
     // 获取拖动后的时间
     const { value } = e.detail;
     const time = +(value / 1000).toFixed(3);
 
+     // 播放时间跳转
+     manager.seek(time);
+
     this.setData({ 
       nowTime: formatTime(value),
-      nowValue: value
+      nowValue: value,
+      play: true
     });
-
-    // 播放时间跳转
-    manager.seek(time);
-
-    this.autoStop = true;
   }
 })

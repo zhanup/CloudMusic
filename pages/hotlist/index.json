@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "SongList": "../../components/SongList/SongList"
-  }
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#eee"
 }
   
     

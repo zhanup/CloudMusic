@@ -32,7 +32,10 @@
       <view class="m-song-lrc">
         <view class="m-song-scroll">
           <view class="m-song-iner" style="top: -{{32 * (idx - 2)}}px;">
-            <view class="m-song-lritem f-thide {{ (idx - 1) == index ? '.active' : '' }}" wx:for="{{lrcCont}}" wx:key="index">{{item}}</view>
+            <view class="m-song-lritem f-thide {{ (idx - 1) == index ? '.active' : '' }}" 
+              wx:for="{{lrcCont}}" 
+              wx:key="index"
+            >{{item}}</view>
           </view>   
         </view>
       </view>
@@ -42,7 +45,16 @@
   <!-- 进度条 -->
   <view class="m-song-slider">
     <view class="current-time">{{nowTime}}</view>
-    <slider class="slider" color="#e9e9e9" block-size="14" backgroundColor="#666" selected-color="#fff" value="{{nowValue}}" max="{{duration}}" bindchanging="handleChanging" bindchange="handleChange" />
+    <slider class="slider"
+      color="#e9e9e9" 
+      block-size="14" 
+      backgroundColor="#666" 
+      selected-color="#fff" 
+      value="{{nowValue}}" 
+      max="{{duration}}" 
+      bindchanging="handleChanging" 
+      bindchange="handleChange"
+    />
     <view class="duration">{{totalTime}}</view>
   </view>
 </view>
