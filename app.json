@@ -12,7 +12,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "云音乐",
+    "navigationBarTitleText": "皮特云音乐",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

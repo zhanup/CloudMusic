@@ -10,7 +10,7 @@ export const request = (params) => {
 
   // 定义公共的url
   // const baseUrl = 'http://localhost:3000/v1';
-  const baseUrl = 'http://192.168.1.106:3000/v1';
+  const baseUrl = 'http://1.15.112.209:3000/v1';
 
   
   return new Promise((resolve, reject) => {
