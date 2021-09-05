@@ -160,8 +160,8 @@ Page({
       history
     });
 
-    this.getMatch(value);
-    this.getSong(value);
+    this.getMatch(suggest);
+    this.getSong(suggest);
   },
 
   // 移除搜索历史
